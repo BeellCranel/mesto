@@ -1,0 +1,14 @@
+@keyframes opacity {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.6;
+  }
+
+}
+
+.opacity:hover {
+  animation: opacity 0.3s ease forwards;
+}

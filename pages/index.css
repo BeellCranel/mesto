@@ -4,6 +4,8 @@
 
 @import url(../bloks/page/page.css);
 
+@import url(../bloks/content/content.css);
+
 /* header */
 
 
@@ -11,4 +13,23 @@
 
 @import url(../bloks/logo/logo.css);
 
+/* profile */
 
+
+@import url(../bloks/profile/profile.css);
+
+@import url(../bloks/profile/__image/profile__image.css);
+
+@import url(../bloks/profile/__info/profile__info.css);
+
+@import url(../bloks/profile/__user-name/profile__user-name.css);
+
+@import url(../bloks/profile/__edit-button/profile__edit-button.css);
+
+@import url(../bloks/profile/__user-description/profile__user-description.css);
+
+@import url(../bloks/profile/__add-button/profile__add-button.css);
+
+@import url(../bloks/profile/__add-button/_icon/profile__add-button_icon.css);
+
+@import url(../bloks/opacity/opacity.css);
