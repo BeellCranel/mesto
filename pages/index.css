@@ -1,3 +1,14 @@
 @import url(../vendor/normalize.css);
 
 @import url(../vendor/fonts/fonts.css);
+
+@import url(../bloks/page/page.css);
+
+/* header */
+
+
+@import url(../bloks/header/header.css);
+
+@import url(../bloks/logo/logo.css);
+
+
