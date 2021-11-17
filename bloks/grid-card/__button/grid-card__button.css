@@ -10,4 +10,15 @@
 
 .grid-card__button:hover {
   cursor: pointer;
+  animation: like 0.3s ease forwards;
+}
+
+@keyframes like {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.5;
+  }
 }
