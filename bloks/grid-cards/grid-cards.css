@@ -11,12 +11,12 @@
 @media screen and (max-width: 768px) {
   .grid-cards {
     grid-template-columns: 282px 282px;
+    padding: 36px 0 48px;
   }
 }
 
 @media screen and (max-width: 630px) {
   .grid-cards {
     grid-template-columns: 282px;
-    padding: 36px 0 48px;
   }
 }

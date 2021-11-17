@@ -48,3 +48,10 @@
 @import url(../bloks/grid-card/__title/grid-card__title.css);
 
 @import url(../bloks/grid-card/__button/grid-card__button.css);
+
+/* footer */
+
+
+@import url(../bloks/footer/footer.css);
+
+@import url(../bloks/footer/__author/footer__author.css);
