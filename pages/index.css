@@ -33,3 +33,18 @@
 @import url(../bloks/profile/__add-button/_icon/profile__add-button_icon.css);
 
 @import url(../bloks/opacity/opacity.css);
+
+/* grid-cards */
+
+
+@import url(../bloks/grid-cards/grid-cards.css);
+
+@import url(../bloks/grid-card/grid-card.css);
+
+@import url(../bloks/grid-card/__image/grid-card__image.css);
+
+@import url(../bloks/grid-card/__caption/grid-card__caption.css);
+
+@import url(../bloks/grid-card/__title/grid-card__title.css);
+
+@import url(../bloks/grid-card/__button/grid-card__button.css);

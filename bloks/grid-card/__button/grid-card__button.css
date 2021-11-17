@@ -1,0 +1,13 @@
+.grid-card__button {
+  background-image: url('../../../images/grid-card/__button/checkbox-vector.svg');
+  background-position: center;
+  background-size: cover;
+  background-color: #fff;
+  width: 22px;
+  height: 19px;
+  border: none;
+}
+
+.grid-card__button:hover {
+  cursor: pointer;
+}
