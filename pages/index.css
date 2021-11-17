@@ -55,3 +55,22 @@
 @import url(../bloks/footer/footer.css);
 
 @import url(../bloks/footer/__author/footer__author.css);
+
+/* edit-form */
+
+
+@import url(../bloks/popup/popup.css);
+
+@import url(../bloks/popup/__opened/popup__opened.css);
+
+@import url(../bloks/popup/__content/popup__content.css);
+
+@import url(../bloks/popup/__close-button/popup__close-button.css);
+
+@import url(../bloks/edit-form/__title/edit-form__title.css);
+
+@import url(../bloks/edit-form/__submit/edit-form__submit.css);
+
+@import url(../bloks/form/form.css);
+
+@import url(../bloks/form/__item/form__item.css);
