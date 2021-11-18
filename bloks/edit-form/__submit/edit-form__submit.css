@@ -22,7 +22,6 @@
 }
 
 .edit-form__submit:hover {
-  cursor: pointer;
   animation: hover 0.3s ease forwards;
 }
 
