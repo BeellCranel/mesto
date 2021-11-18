@@ -2,6 +2,8 @@
   background-image: url('../../../images/popup/__close-button/close-button.svg');
   background-size: cover;
   background-position: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
   width: 32px;
   height: 32px;
   position: absolute;
