@@ -9,7 +9,7 @@
   border: 1px solid #fff;
 }
 
-.profile__edit-button {
+.profile__edit-button:hover {
   cursor: pointer;
 }
 
