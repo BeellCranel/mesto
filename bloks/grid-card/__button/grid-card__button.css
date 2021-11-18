@@ -6,6 +6,7 @@
   width: 22px;
   height: 19px;
   border: none;
+  padding: 1px 11px;
 }
 
 .grid-card__button:hover {
