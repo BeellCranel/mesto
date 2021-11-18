@@ -1,10 +1,10 @@
-.profile__add-button__icon {
+.profile__add-button_item_icon {
   width: 22px;
   height: 22px;
 }
 
 @media screen and (max-width: 768px) {
-  .profile__add-button__icon {
+  .profile__add-button_item_icon {
     width: 16px;
     height: 16px;
   }
