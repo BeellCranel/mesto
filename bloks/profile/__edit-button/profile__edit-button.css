@@ -9,6 +9,10 @@
   border: 1px solid #fff;
 }
 
+.profile__edit-button {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .profile__edit-button {
     background-size: 7.5px;

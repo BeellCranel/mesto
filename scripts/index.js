@@ -7,6 +7,8 @@ const popupClose = popup.querySelector('.popup__close-button');
 
 function openPopup() {
   popup.classList.add('popup__opened');
+  inputUserName.value = profileUserName.textContent;
+  inputDescription.value = profileDescriptoin.textContent;
 }
 
 editButton.addEventListener('click', openPopup);
@@ -31,7 +33,7 @@ function submitForm(evt) {
   evt.preventDefault();
 
   profileUserName.textContent = inputUserName.value;
-  inputDescription.textContent = profileDescriptoin.value;
+  profileDescriptoin.textContent = inputDescription.value;
 }
 
 form.addEventListener('submit', submitForm);
