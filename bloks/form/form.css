@@ -1,11 +1,9 @@
 .form {
-  margin: 41px 0 48px;
-  padding: 0;
-  border: none;
-}
-
-@media screen and (max-width: 630px) {
-  .form {
-    margin: 62px 0 45px;
-  }
+  font-family: 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
 }
