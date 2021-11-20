@@ -11,6 +11,6 @@
   .profile__info {
     grid-template-columns: 189px min-content;
     column-gap: 10px;
-    row-gap: 14px;
+    row-gap: 7px;
   }
 }

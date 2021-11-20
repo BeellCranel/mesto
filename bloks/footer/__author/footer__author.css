@@ -6,3 +6,10 @@
   line-height: 1.22;
   margin: 0;
 }
+
+@media screen and (max-width: 630px) {
+  .footer__author {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}

@@ -1,6 +1,6 @@
 .grid-card {
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   overflow: hidden;
+  border-radius: 10px;
 }
