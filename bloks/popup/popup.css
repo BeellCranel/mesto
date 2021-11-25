@@ -8,5 +8,9 @@
   align-items: center;
   background-color: rgba(0, 0, 0, .5);
   padding: 0 19px;
-  display: none;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 0;
+  transition: all 0.3s ease-out;
 }
