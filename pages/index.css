@@ -74,3 +74,5 @@
 @import url(../bloks/form/__fieldset/form__fieldset.css);
 
 @import url(../bloks/form/__input/form__input.css);
+
+@import url(../bloks/form/__input/_theme/form__input_theme_gray.css);

@@ -1,12 +1,41 @@
-const popup = document.querySelector('.popup');
-const editButton = document.querySelector('.profile__edit-button');
 const editPopup = document.querySelector('.popup_edit');
-const popupClose = popup.querySelector('.popup__close-button');
-const editForm = popup.querySelector('.form_edit');
-const inputUserName = popup.querySelector('.form__input_type_user-name');
-const inputDescription = popup.querySelector('.form__input_type_user-description');
+const editButton = document.querySelector('.profile__edit-button');
+const editForm = document.querySelector('.form_edit');
+const addPopup = document.querySelector('.popup_add');
+const addButton = document.querySelector('.profile__add-button');
+const addForm = document.querySelector('.form_add');
+const closeButtons = document.querySelectorAll('.popup__close-button');
+const inputUserName = document.querySelector('.form__input_type_user-name');
+const inputDescription = document.querySelector('.form__input_type_user-description');
+const inputPlaceName = document.querySelector('.form__input_type_place-name');
+const inputImageUrl = document.querySelector('.form__input_type_image-url');
 const profileUserName = document.querySelector('.profile__user-name');
 const profileDescriptoin = document.querySelector('.profile__user-description');
+const initialCards = [{
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
 function openEditPopup() {
   editPopup.classList.add('popup_opened');
@@ -14,17 +43,34 @@ function openEditPopup() {
   inputDescription.value = profileDescriptoin.textContent;
 }
 
-function closePopup() {
-  popup.classList.remove('popup_opened');
+function openAddPopup() {
+  addPopup.classList.add('popup_opened');
+}
+
+function closePopup(evt) {
+  const targetEl = evt.target;
+  const targetPopup = targetEl.closest('.popup');
+  targetPopup.classList.remove('popup_opened');
+}
+
+function closeForAll(elements, evtListener) {
+  Array.from(elements).forEach((el) => el.addEventListener('click', evtListener));
 }
 
 function submitEditForm(evt) {
   evt.preventDefault();
   profileUserName.textContent = inputUserName.value;
   profileDescriptoin.textContent = inputDescription.value;
-  closePopup();
+  closePopup(evt);
+}
+
+function submitAddForm(evt) {
+  evt.preventDefault();
+  closePopup(evt);
 }
 
 editButton.addEventListener('click', openEditPopup);
-popupClose.addEventListener('click', closePopup);
+addButton.addEventListener('click', openAddPopup);
 editForm.addEventListener('submit', submitEditForm);
+addForm.addEventListener('submit', submitAddForm);
+closeForAll(closeButtons, closePopup);
