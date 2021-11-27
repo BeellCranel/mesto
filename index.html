@@ -27,48 +27,7 @@
         <button class="profile__add-button opacity" type="button"></button>
       </section>
       <section class="grid-cards">
-        <article class="grid-card">
-          <img class="grid-card__image" src="./images/grid-card/__image/karachaevsk.jpg" alt="Карачаевск">
-          <div class="grid-card__caption">
-            <h2 class="grid-card__title">Карачаевск</h2>
-            <button class="grid-card__button" type="button"></button>
-          </div>
-        </article>
-        <article class="grid-card">
-          <img class="grid-card__image" src="./images/grid-card/__image/elbrus.jpg" alt="Эльбрус">
-          <div class="grid-card__caption">
-            <h2 class="grid-card__title">Гора Эльбрус</h2>
-            <button class="grid-card__button" type="button"></button>
-          </div>
-        </article>
-        <article class="grid-card">
-          <img class="grid-card__image" src="./images/grid-card/__image/dombai.jpg" alt="Домбай">
-          <div class="grid-card__caption">
-            <h2 class="grid-card__title">Домбай</h2>
-            <button class="grid-card__button" type="button"></button>
-          </div>
-        </article>
-        <article class="grid-card">
-          <img class="grid-card__image" src="./images/grid-card/__image//elbrus.jpg" alt="Эльбрус">
-          <div class="grid-card__caption">
-            <h2 class="grid-card__title">Гора Эльбрус</h2>
-            <button class="grid-card__button" type="button"></button>
-          </div>
-        </article>
-        <article class="grid-card">
-          <img class="grid-card__image" src="./images/grid-card/__image/dombai.jpg" alt="Домбай">
-          <div class="grid-card__caption">
-            <h2 class="grid-card__title">Домбай</h2>
-            <button class="grid-card__button" type="button"></button>
-          </div>
-        </article>
-        <article class="grid-card">
-          <img class="grid-card__image" src="./images/grid-card/__image/karachaevsk.jpg" alt="Карачаевск">
-          <div class="grid-card__caption">
-            <h2 class="grid-card__title">Карачаево-Черкесия</h2>
-            <button class="grid-card__button" type="button"></button>
-          </div>
-        </article>
+
       </section>
     </main>
     <footer class="footer">
@@ -94,13 +53,24 @@
       <form class="form form_add" name="add-form">
         <h2 class="form__title">Редактировать профиль</h2>
         <fieldset class="form__fieldset">
-          <input class="form__input form__input_theme_gray form__input_type_place-name" type="text" name="place-name" value="Название">
-          <input class="form__input form__input_theme_gray form__input_type_image-url" type="text" name="image-url" value="Ссылка на картинку">
+          <input class="form__input form__input_theme_gray form__input_type_place-name" type="text" name="place-name"
+            value="Название">
+          <input class="form__input form__input_theme_gray form__input_type_image-url" type="text" name="image-url"
+            value="Ссылка на картинку">
         </fieldset>
         <input class="form__submit" type="submit" name="submit" value="Создать">
       </form>
     </div>
   </div>
+  <template class="template-card">
+    <article class="grid-card">
+      <img class="grid-card__image">
+      <div class="grid-card__caption">
+        <h2 class="grid-card__title">Карачаево-Черкесия</h2>
+        <button class="grid-card__button" type="button"></button>
+      </div>
+    </article>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 

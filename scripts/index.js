@@ -36,6 +36,8 @@ const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+const cardsContainer = document.querySelector('.grid-cards');
+const cardTemplate = document.querySelector('.template-card').content;
 
 function openEditPopup() {
   editPopup.classList.add('popup_opened');
@@ -69,8 +71,27 @@ function submitAddForm(evt) {
   closePopup(evt);
 }
 
+function renderCards() {
+  const cardHtml = initialCards.map(addCard);
+  cardsContainer.append(...cardHtml);
+}
+
+function addCard(item) {
+  const cardEl = cardTemplate.querySelector('.grid-card').cloneNode(true);
+
+  const cardImage = cardEl.querySelector('.grid-card__image');
+  cardImage.setAttribute('src', item.link);
+  cardImage.setAttribute('alt', item.name);
+
+  const cardTilte = cardEl.querySelector('.grid-card__title');
+  cardTilte.textContent = item.name;
+
+  return cardEl;
+}
+
 editButton.addEventListener('click', openEditPopup);
 addButton.addEventListener('click', openAddPopup);
 editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
 closeForAll(closeButtons, closePopup);
+renderCards();
