@@ -94,14 +94,23 @@ function renderCards() {
 function addCard(item) {
   const cardEl = cardTemplate.querySelector('.grid-card').cloneNode(true);
 
+  const cardDel = cardEl.querySelector('.grid-card__delete-button');
+  cardDel.addEventListener('click', removeCard);
+
   const cardImage = cardEl.querySelector('.grid-card__image');
   cardImage.setAttribute('src', item.link);
-  cardImage.setAttribute('alt', item.name);
+  cardImage.setAttribute('alt', `Фотография "${item.name}"`);
 
   const cardTilte = cardEl.querySelector('.grid-card__title');
   cardTilte.textContent = item.name;
 
   return cardEl;
+}
+
+function removeCard (evt) {
+  const targetEl = evt.target;
+  const card = targetEl.closest('.grid-card');
+  card.remove();
 }
 
 editButton.addEventListener('click', openEditPopup);
