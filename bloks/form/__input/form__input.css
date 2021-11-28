@@ -11,6 +11,15 @@
   margin-bottom: 25px;
 }
 
+.form__input::placeholder {
+  color: #c4c4c4;
+}
+
+.form__input:focus {
+  padding: 9px 5px;
+
+}
+
 @media screen and (max-width: 630px) {
   .form__input {
     margin-bottom: 20px;

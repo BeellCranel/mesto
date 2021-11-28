@@ -110,13 +110,13 @@ function addCard(item) {
   return cardEl;
 }
 
-function removeCard (evt) {
+function removeCard(evt) {
   const targetEl = evt.target;
   const card = targetEl.closest('.grid-card');
   card.remove();
 }
 
-function activateLike (evt) {
+function activateLike(evt) {
   const targetEl = evt.target;
   targetEl.classList.toggle('grid-card__like-button_active');
 }

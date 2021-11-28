@@ -53,14 +53,25 @@
       <form class="form form_add" name="add-form">
         <h2 class="form__title">Редактировать профиль</h2>
         <fieldset class="form__fieldset">
-          <input class="form__input form__input_theme_gray form__input_type_place-name" type="text" name="place-name"
-            placeholder="Название" value="">
-          <input class="form__input form__input_theme_gray form__input_type_image-url" type="text" name="image-url"
+          <input class="form__input form__input_type_place-name" type="text" name="place-name" placeholder="Название"
+            value="">
+          <input class="form__input form__input_type_image-url" type="text" name="image-url"
             placeholder="Ссылка на картинку" value="">
         </fieldset>
         <input class="form__submit" type="submit" name="submit" value="Создать">
       </form>
     </div>
+  </div>
+  <div class="popup popup_opened popup_image">
+    <figure class="figure">
+      <button class="figure__close-button opacity" type="button"></button>
+      <img class="figure__image"
+        src="https://images.unsplash.com/photo-1638095562082-449d8c5a47b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
+        alt="фотография">
+      <figcaption class="figure__figcaption">
+        <p class="figure__image-caption">бла блабла</p>
+      </figcaption>
+    </figure>
   </div>
   <template class="template-card">
     <article class="grid-card">

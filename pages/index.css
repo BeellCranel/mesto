@@ -63,6 +63,8 @@
 
 @import url(../bloks/popup/popup.css);
 
+@import url(../bloks/popup/_image/popup_image.css);
+
 @import url(../bloks/popup/_opened/popup_opened.css);
 
 @import url(../bloks/popup/__content/popup__content.css);
@@ -79,4 +81,12 @@
 
 @import url(../bloks/form/__input/form__input.css);
 
-@import url(../bloks/form/__input/_theme/form__input_theme_gray.css);
+/* figure */
+
+@import url(../bloks/figure/figure.css);
+
+@import url(../bloks/figure/__close-button/figure__close-button.css);
+
+@import url(../bloks/figure/__image/figure__image.css);
+
+@import url(../bloks/figure/__image-caption/figure__image-caption.css);
