@@ -104,6 +104,9 @@ function addCard(item) {
   const cardTilte = cardEl.querySelector('.grid-card__title');
   cardTilte.textContent = item.name;
 
+  const cardLike = cardEl.querySelector('.grid-card__like-button');
+  cardLike.addEventListener('click', activateLike);
+
   return cardEl;
 }
 
@@ -111,6 +114,11 @@ function removeCard (evt) {
   const targetEl = evt.target;
   const card = targetEl.closest('.grid-card');
   card.remove();
+}
+
+function activateLike (evt) {
+  const targetEl = evt.target;
+  targetEl.classList.toggle('grid-card__like-button_active');
 }
 
 editButton.addEventListener('click', openEditPopup);

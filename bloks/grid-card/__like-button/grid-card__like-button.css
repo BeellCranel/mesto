@@ -1,15 +1,15 @@
-.grid-card__button {
-  background-image: url('../../../images/grid-card/__button/button.svg');
+.grid-card__like-button {
+  background-image: url('../../../images/grid-card/__like-button/like-button.svg');
   background-position: center;
   background-size: cover;
-  background-color: #fff;
+  background-color: transparent;
   width: 22px;
   height: 19px;
   border: none;
   padding: 1px 11px;
 }
 
-.grid-card__button:hover {
+.grid-card__like-button:hover {
   cursor: pointer;
   animation: like 0.3s ease forwards;
 }
