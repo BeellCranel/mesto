@@ -47,6 +47,8 @@ function openEditPopup() {
 
 function openAddPopup() {
   addPopup.classList.add('popup_opened');
+  inputPlaceName.value = '';
+  inputImageUrl.value = '';
 }
 
 function closePopup(evt) {
@@ -68,6 +70,19 @@ function submitEditForm(evt) {
 
 function submitAddForm(evt) {
   evt.preventDefault();
+
+  const newCardEl = {
+    name: '',
+    link: ''
+  };
+
+  newCardEl.name = inputPlaceName.value;
+  newCardEl.link = inputImageUrl.value;
+
+  const cardHtml = addCard(newCardEl);
+
+  cardsContainer.prepend(cardHtml);
+
   closePopup(evt);
 }
 
