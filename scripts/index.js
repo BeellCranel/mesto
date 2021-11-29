@@ -6,13 +6,14 @@ const addButton = document.querySelector('.profile__add-button');
 const addForm = document.querySelector('.form_add');
 const imagePopup = document.querySelector('.popup_image');
 const closeButtons = document.querySelectorAll('.popup__close-button');
-const popupLeyers = document.querySelectorAll('.popup');
 const inputUserName = document.querySelector('.form__input_type_user-name');
 const inputDescription = document.querySelector('.form__input_type_user-description');
 const inputPlaceName = document.querySelector('.form__input_type_place-name');
 const inputImageUrl = document.querySelector('.form__input_type_image-url');
 const profileUserName = document.querySelector('.profile__user-name');
 const profileDescriptoin = document.querySelector('.profile__user-description');
+const cardsContainer = document.querySelector('.grid-cards');
+const cardTemplate = document.querySelector('.template-card').content;
 const initialCards = [{
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -38,8 +39,6 @@ const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const cardsContainer = document.querySelector('.grid-cards');
-const cardTemplate = document.querySelector('.template-card').content;
 
 function openEditPopup() {
   editPopup.classList.add('popup_opened');

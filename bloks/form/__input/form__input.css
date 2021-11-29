@@ -7,8 +7,8 @@
   color: #000;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 9px 0;
-  margin-bottom: 25px;
+  padding: 8px 0;
+  margin-bottom: 23px;
 }
 
 .form__input::placeholder {
@@ -16,12 +16,12 @@
 }
 
 .form__input:focus {
-  padding: 9px 5px;
+  padding: 8px 5px;
 
 }
 
 @media screen and (max-width: 630px) {
   .form__input {
-    margin-bottom: 20px;
+    margin-bottom: 23px;
   }
 }
