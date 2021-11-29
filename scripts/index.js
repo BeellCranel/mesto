@@ -4,7 +4,9 @@ const editForm = document.querySelector('.form_edit');
 const addPopup = document.querySelector('.popup_add');
 const addButton = document.querySelector('.profile__add-button');
 const addForm = document.querySelector('.form_add');
+const imagePopup = document.querySelector('.popup_image');
 const closeButtons = document.querySelectorAll('.popup__close-button');
+const popupLeyers = document.querySelectorAll('.popup');
 const inputUserName = document.querySelector('.form__input_type_user-name');
 const inputDescription = document.querySelector('.form__input_type_user-description');
 const inputPlaceName = document.querySelector('.form__input_type_place-name');
@@ -51,6 +53,21 @@ function openAddPopup() {
   inputImageUrl.value = '';
 }
 
+function openImagePopup(evt) {
+  imagePopup.classList.add('popup_opened');
+
+  const targetEl = evt.target;
+  const targetElLink = targetEl.getAttribute('src');
+  const targetElAlt = targetEl.getAttribute('alt');
+
+  const imageEl = document.querySelector('.figure__image');
+  imageEl.setAttribute('src', targetElLink);
+  imageEl.setAttribute('alt', targetElAlt);
+
+  const imageCaption = document.querySelector('.figure__image-caption');
+  imageCaption.textContent = targetElAlt;
+}
+
 function closePopup(evt) {
   const targetEl = evt.target;
   const targetPopup = targetEl.closest('.popup');
@@ -71,15 +88,15 @@ function submitEditForm(evt) {
 function submitAddForm(evt) {
   evt.preventDefault();
 
-  const newCardEl = {
+  const item = {
     name: '',
     link: ''
   };
 
-  newCardEl.name = inputPlaceName.value;
-  newCardEl.link = inputImageUrl.value;
+  item.name = inputPlaceName.value;
+  item.link = inputImageUrl.value;
 
-  const cardHtml = addCard(newCardEl);
+  const cardHtml = addCard(item);
 
   cardsContainer.prepend(cardHtml);
 
@@ -99,7 +116,8 @@ function addCard(item) {
 
   const cardImage = cardEl.querySelector('.grid-card__image');
   cardImage.setAttribute('src', item.link);
-  cardImage.setAttribute('alt', `Фотография "${item.name}"`);
+  cardImage.setAttribute('alt', item.name);
+  cardImage.addEventListener('click', openImagePopup);
 
   const cardTilte = cardEl.querySelector('.grid-card__title');
   cardTilte.textContent = item.name;
