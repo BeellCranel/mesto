@@ -5,6 +5,7 @@ const addPopup = document.querySelector('.popup_add');
 const addButton = document.querySelector('.profile__add-button');
 const addForm = document.querySelector('.form_add');
 const imagePopup = document.querySelector('.popup_image');
+const closeLayers = document.querySelectorAll('.popup');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 const inputUserName = document.querySelector('.form__input_type_user-name');
 const inputDescription = document.querySelector('.form__input_type_user-description');
@@ -40,21 +41,33 @@ const initialCards = [{
   }
 ];
 
-function openEditPopup() {
-  editPopup.classList.add('popup_opened');
-  inputUserName.value = profileUserName.textContent;
-  inputDescription.value = profileDescriptoin.textContent;
+function openPopup(evt) {
+  const targetEl = evt.target.getAttribute('class');
+  if (targetEl.includes('profile__edit-button')) {
+    editPopup.classList.add('popup_opened');
+  }
+  if (targetEl.includes('profile__add-button')) {
+    addPopup.classList.add('popup_opened');
+  }
+  if (targetEl.includes('grid-card__image')) {
+    imagePopup.classList.add('popup_opened');
+  }
 }
 
-function openAddPopup() {
-  addPopup.classList.add('popup_opened');
-  inputPlaceName.value = '';
-  inputImageUrl.value = '';
+function openEditPopup(evt) {
+  inputUserName.value = profileUserName.textContent;
+  inputDescription.value = profileDescriptoin.textContent;
+
+  openPopup(evt);
+}
+
+function openAddPopup(evt) {
+  addForm.reset();
+
+  openPopup(evt);
 }
 
 function openImagePopup(evt) {
-  imagePopup.classList.add('popup_opened');
-
   const targetEl = evt.target;
   const targetElLink = targetEl.getAttribute('src');
   const targetElAlt = targetEl.getAttribute('alt');
@@ -65,16 +78,20 @@ function openImagePopup(evt) {
 
   const imageCaption = document.querySelector('.figure__image-caption');
   imageCaption.textContent = targetElAlt;
+
+  openPopup(evt);
 }
 
 function closePopup(evt) {
-  const targetEl = evt.target;
-  const targetPopup = targetEl.closest('.popup');
-  targetPopup.classList.remove('popup_opened');
+  const targetEl = evt.target.getAttribute('class');
+  const targetPopup = evt.target.closest('.popup');
+  if (targetEl.includes('popup_opened') || targetEl.includes('popup__close-button') || targetEl.includes('form__submit'))
+    targetPopup.classList.remove('popup_opened');
 }
 
-function closeForAll(elements, evtListener) {
-  Array.from(elements).forEach((el) => el.addEventListener('click', evtListener));
+function closeForAll(closeLayers, closeButtons, evtListener) {
+  Array.from(closeLayers).forEach((el) => el.addEventListener('click', evtListener));
+  Array.from(closeButtons).forEach((el) => el.addEventListener('click', evtListener));
 }
 
 function submitEditForm(evt) {
@@ -88,12 +105,9 @@ function submitAddForm(evt) {
   evt.preventDefault();
 
   const item = {
-    name: '',
-    link: ''
+    name: inputPlaceName.value,
+    link: inputImageUrl.value
   };
-
-  item.name = inputPlaceName.value;
-  item.link = inputImageUrl.value;
 
   const cardHtml = addCard(item);
 
@@ -142,5 +156,5 @@ editButton.addEventListener('click', openEditPopup);
 addButton.addEventListener('click', openAddPopup);
 editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
-closeForAll(closeButtons, closePopup);
+closeForAll(closeLayers, closeButtons, closePopup);
 renderCards();
