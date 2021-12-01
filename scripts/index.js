@@ -1,12 +1,10 @@
-const editPopup = document.querySelector('.popup_edit');
-const editButton = document.querySelector('.profile__edit-button');
+const editOpenButton = document.querySelector('.profile__edit-button');
+const editCloseButton = document.querySelector('.edit-close');
 const editForm = document.querySelector('.form_edit');
-const addPopup = document.querySelector('.popup_add');
-const addButton = document.querySelector('.profile__add-button');
+const addOpenButton = document.querySelector('.profile__add-button');
+const addCloseButton = document.querySelector('.add-close');
 const addForm = document.querySelector('.form_add');
-const imagePopup = document.querySelector('.popup_image');
-const closeLayers = document.querySelectorAll('.popup');
-const closeButtons = document.querySelectorAll('.popup__close-button');
+const imageCloseButton = document.querySelector('.image-close');
 const inputUserName = document.querySelector('.form__input_type_user-name');
 const inputDescription = document.querySelector('.form__input_type_user-description');
 const inputPlaceName = document.querySelector('.form__input_type_place-name');
@@ -41,30 +39,23 @@ const initialCards = [{
   }
 ];
 
-function openPopup(evt) {
-  const targetEl = evt.target.getAttribute('class');
-  if (targetEl.includes('profile__edit-button')) {
-    editPopup.classList.add('popup_opened');
-  }
-  if (targetEl.includes('profile__add-button')) {
-    addPopup.classList.add('popup_opened');
-  }
-  if (targetEl.includes('grid-card__image')) {
-    imagePopup.classList.add('popup_opened');
-  }
+function openPopup(somePopup) {
+  const popup = document.querySelector(`${somePopup}`);
+
+  popup.classList.add('popup_opened');
 }
 
-function openEditPopup(evt) {
+function openEditPopup() {
   inputUserName.value = profileUserName.textContent;
   inputDescription.value = profileDescriptoin.textContent;
 
-  openPopup(evt);
+  openPopup('.popup_edit');
 }
 
 function openAddPopup(evt) {
   addForm.reset();
 
-  openPopup(evt);
+  openPopup('.popup_add');
 }
 
 function openImagePopup(evt) {
@@ -79,26 +70,20 @@ function openImagePopup(evt) {
   const imageCaption = document.querySelector('.figure__image-caption');
   imageCaption.textContent = targetElAlt;
 
-  openPopup(evt);
+  openPopup('.popup_image');
 }
 
-function closePopup(evt) {
-  const targetEl = evt.target.getAttribute('class');
-  const targetPopup = evt.target.closest('.popup');
-  if (targetEl.includes('popup_opened') || targetEl.includes('popup__close-button') || targetEl.includes('form__submit'))
-    targetPopup.classList.remove('popup_opened');
-}
+function closePopup(somePopup) {
+  const popup = document.querySelector(`${somePopup}`);
 
-function closeForAll(closeLayers, closeButtons, evtListener) {
-  Array.from(closeLayers).forEach((el) => el.addEventListener('click', evtListener));
-  Array.from(closeButtons).forEach((el) => el.addEventListener('click', evtListener));
+  popup.classList.remove('popup_opened');
 }
 
 function submitEditForm(evt) {
   evt.preventDefault();
   profileUserName.textContent = inputUserName.value;
   profileDescriptoin.textContent = inputDescription.value;
-  closePopup(evt);
+  closePopup('.popup_edit');
 }
 
 function submitAddForm(evt) {
@@ -113,7 +98,7 @@ function submitAddForm(evt) {
 
   cardsContainer.prepend(cardHtml);
 
-  closePopup(evt);
+  closePopup('.popup_add');
 }
 
 function renderCards() {
@@ -152,9 +137,11 @@ function activateLike(evt) {
   targetEl.classList.toggle('grid-card__like-button_active');
 }
 
-editButton.addEventListener('click', openEditPopup);
-addButton.addEventListener('click', openAddPopup);
+editOpenButton.addEventListener('click', openEditPopup);
+addOpenButton.addEventListener('click', openAddPopup);
 editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
-closeForAll(closeLayers, closeButtons, closePopup);
+editCloseButton.addEventListener('click', () => closePopup('.popup_edit'));
+addCloseButton.addEventListener('click', () => closePopup('.popup_add'));
+imageCloseButton.addEventListener('click', () => closePopup('.popup_image'));
 renderCards();
