@@ -52,7 +52,7 @@ function openEditPopup() {
   openPopup('.popup_edit');
 }
 
-function openAddPopup(evt) {
+function openAddPopup() {
   addForm.reset();
 
   openPopup('.popup_add');
