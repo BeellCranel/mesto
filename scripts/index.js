@@ -80,8 +80,10 @@ function closePopup(somePopup) {
 
 function submitEditForm(evt) {
   evt.preventDefault();
+
   profileUserName.textContent = inputUserName.value;
   profileDescriptoin.textContent = inputDescription.value;
+
   closePopup(editPopup);
 }
 
@@ -92,9 +94,7 @@ function submitAddForm(evt) {
     name: inputPlaceName.value,
     link: inputImageUrl.value
   };
-
   const cardHtml = addCard(item);
-
   cardsContainer.prepend(cardHtml);
 
   closePopup(addPopup);
@@ -108,8 +108,8 @@ function renderCards() {
 function addCard(item) {
   const cardEl = cardTemplate.querySelector('.grid-card').cloneNode(true);
 
-  const cardDel = cardEl.querySelector('.grid-card__delete-button');
-  cardDel.addEventListener('click', removeCard);
+  const cardRmv = cardEl.querySelector('.grid-card__delete-button');
+  cardRmv.addEventListener('click', removeCard);
 
   const cardImage = cardEl.querySelector('.grid-card__image');
   cardImage.setAttribute('src', item.link);
@@ -128,6 +128,7 @@ function addCard(item) {
 function removeCard(evt) {
   const targetEl = evt.target;
   const card = targetEl.closest('.grid-card');
+
   card.remove();
 }
 
