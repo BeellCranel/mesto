@@ -1,9 +1,12 @@
+const editPopup = document.querySelector('.popup_edit');
 const editOpenButton = document.querySelector('.profile__edit-button');
 const editCloseButton = document.querySelector('.edit-close');
 const editForm = document.querySelector('.form_edit');
+const addPopup = document.querySelector('.popup_add');
 const addOpenButton = document.querySelector('.profile__add-button');
 const addCloseButton = document.querySelector('.add-close');
 const addForm = document.querySelector('.form_add');
+const imagePopup = document.querySelector('.popup_image');
 const imageCloseButton = document.querySelector('.image-close');
 const inputUserName = document.querySelector('.form__input_type_user-name');
 const inputDescription = document.querySelector('.form__input_type_user-description');
@@ -40,22 +43,20 @@ const initialCards = [{
 ];
 
 function openPopup(somePopup) {
-  const popup = document.querySelector(`${somePopup}`);
-
-  popup.classList.add('popup_opened');
+  somePopup.classList.add('popup_opened');
 }
 
 function openEditPopup() {
   inputUserName.value = profileUserName.textContent;
   inputDescription.value = profileDescriptoin.textContent;
 
-  openPopup('.popup_edit');
+  openPopup(editPopup);
 }
 
 function openAddPopup() {
   addForm.reset();
 
-  openPopup('.popup_add');
+  openPopup(addPopup);
 }
 
 function openImagePopup(evt) {
@@ -70,20 +71,18 @@ function openImagePopup(evt) {
   const imageCaption = document.querySelector('.figure__image-caption');
   imageCaption.textContent = targetElAlt;
 
-  openPopup('.popup_image');
+  openPopup(imagePopup);
 }
 
 function closePopup(somePopup) {
-  const popup = document.querySelector(`${somePopup}`);
-
-  popup.classList.remove('popup_opened');
+  somePopup.classList.remove('popup_opened');
 }
 
 function submitEditForm(evt) {
   evt.preventDefault();
   profileUserName.textContent = inputUserName.value;
   profileDescriptoin.textContent = inputDescription.value;
-  closePopup('.popup_edit');
+  closePopup(editPopup);
 }
 
 function submitAddForm(evt) {
@@ -98,7 +97,7 @@ function submitAddForm(evt) {
 
   cardsContainer.prepend(cardHtml);
 
-  closePopup('.popup_add');
+  closePopup(addPopup);
 }
 
 function renderCards() {
@@ -141,7 +140,7 @@ editOpenButton.addEventListener('click', openEditPopup);
 addOpenButton.addEventListener('click', openAddPopup);
 editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
-editCloseButton.addEventListener('click', () => closePopup('.popup_edit'));
-addCloseButton.addEventListener('click', () => closePopup('.popup_add'));
-imageCloseButton.addEventListener('click', () => closePopup('.popup_image'));
+editCloseButton.addEventListener('click', () => closePopup(editPopup));
+addCloseButton.addEventListener('click', () => closePopup(addPopup));
+imageCloseButton.addEventListener('click', () => closePopup(imagePopup));
 renderCards();
