@@ -1,3 +1,4 @@
+// Обьявляем все пременные
 const editPopup = document.querySelector('.popup_edit');
 const editOpenButton = document.querySelector('.profile__edit-button');
 const editCloseButton = document.querySelector('.edit-close');
@@ -41,11 +42,15 @@ const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
+// общая функиция открытия попапа
 function openPopup(somePopup) {
   somePopup.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => {
+    closePopupEsc(somePopup, evt)
+  });
 }
 
+// функиция открытия попапа редактирования
 function openEditPopup() {
   inputUserName.value = profileUserName.textContent;
   inputDescription.value = profileDescriptoin.textContent;
@@ -53,12 +58,14 @@ function openEditPopup() {
   openPopup(editPopup);
 }
 
+// функиция открытия попапа добавления карточек
 function openAddPopup() {
   addForm.reset();
 
   openPopup(addPopup);
 }
 
+// функиция открытия попапа просмотра изображения
 function openImagePopup(evt) {
   const targetEl = evt.target;
   const targetElLink = targetEl.getAttribute('src');
@@ -74,10 +81,20 @@ function openImagePopup(evt) {
   openPopup(imagePopup);
 }
 
+// общая функиция закрытия попапа
 function closePopup(somePopup) {
   somePopup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
 }
 
+// функция закрытия попапа по еск
+function closePopupEsc(somePopup, evt) {
+  if (evt.key === 'Escape') {
+    closePopup(somePopup);
+  }
+}
+
+// функиция сабмита попапа редактирования
 function submitEditForm(evt) {
   evt.preventDefault();
   profileUserName.textContent = inputUserName.value;
@@ -85,6 +102,7 @@ function submitEditForm(evt) {
   closePopup(editPopup);
 }
 
+// функиция сабмита попапа добавления карточек
 function submitAddForm(evt) {
   evt.preventDefault();
 
@@ -100,11 +118,13 @@ function submitAddForm(evt) {
   closePopup(addPopup);
 }
 
+// функция рэндера карточек на страницу
 function renderCards() {
   const cardHtml = initialCards.map(addCard);
   cardsContainer.append(...cardHtml);
 }
 
+// функция создания карточек
 function addCard(item) {
   const cardEl = cardTemplate.querySelector('.grid-card').cloneNode(true);
 
@@ -125,17 +145,20 @@ function addCard(item) {
   return cardEl;
 }
 
+// функиция удаления карточек
 function removeCard(evt) {
   const targetEl = evt.target;
   const card = targetEl.closest('.grid-card');
   card.remove();
 }
 
+// функция лайка
 function activateLike(evt) {
   const targetEl = evt.target;
   targetEl.classList.toggle('grid-card__like-button_active');
 }
 
+// назначаем слушатели
 editOpenButton.addEventListener('click', openEditPopup);
 addOpenButton.addEventListener('click', openAddPopup);
 editForm.addEventListener('submit', submitEditForm);
