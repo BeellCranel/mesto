@@ -1,4 +1,5 @@
 // Обьявляем все пременные
+const popups = document.querySelectorAll('.popup');
 const editPopup = document.querySelector('.popup_edit');
 const editOpenButton = document.querySelector('.profile__edit-button');
 const editCloseButton = document.querySelector('.edit-close');
@@ -45,6 +46,7 @@ const initialCards = [{
 // общая функиция открытия попапа
 function openPopup(somePopup) {
   somePopup.classList.add('popup_opened');
+
   document.addEventListener('keydown', (evt) => {
     closePopupEsc(somePopup, evt)
   });
@@ -157,6 +159,15 @@ function activateLike(evt) {
   const targetEl = evt.target;
   targetEl.classList.toggle('grid-card__like-button_active');
 }
+
+// функция закрытия попапа по оверлэю
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
+  });
+});
 
 // назначаем слушатели
 editOpenButton.addEventListener('click', openEditPopup);
