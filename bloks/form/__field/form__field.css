@@ -1,10 +1,5 @@
-.figure {
+.form__field {
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 0;
-}
-
-.figure:hover {
-  cursor: auto;
 }

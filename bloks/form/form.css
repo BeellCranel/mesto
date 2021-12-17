@@ -1,4 +1,5 @@
 .form {
+  padding: 35px 36px 37px;
   font-family: 'Inter', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -6,4 +7,10 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+}
+
+@media screen and (max-width: 630px) {
+  .form {
+    padding: 26px 22px;
+  }
 }
