@@ -1,19 +1,23 @@
 // Обьявляем все пременные
 const popups = document.querySelectorAll('.popup');
+// Переменные edit попапа
 const editPopup = document.querySelector('.popup_edit');
 const editOpenButton = document.querySelector('.profile__edit-button');
-const editCloseButton = document.querySelector('.edit-close');
-const editForm = document.querySelector('.form_edit');
+const editForm = editPopup.querySelector('.form');
+const editFormSubmit = editPopup.querySelector('.form__submit');
+// Переменные add попапа
 const addPopup = document.querySelector('.popup_add');
 const addOpenButton = document.querySelector('.profile__add-button');
-const addCloseButton = document.querySelector('.add-close');
-const addForm = document.querySelector('.form_add');
+const addForm = addPopup.querySelector('.form');
+const addFormSubmit = addPopup.querySelector('.form__submit');
+// Переменные image попапа
 const imagePopup = document.querySelector('.popup_image');
-const imageCloseButton = document.querySelector('.image-close');
+// Переменные инпутов
 const inputUserName = document.querySelector('.form__input_type_user-name');
 const inputDescription = document.querySelector('.form__input_type_user-description');
 const inputPlaceName = document.querySelector('.form__input_type_place-name');
 const inputImageUrl = document.querySelector('.form__input_type_image-url');
+// Остальные переменные
 const profileUserName = document.querySelector('.profile__user-name');
 const profileDescriptoin = document.querySelector('.profile__user-description');
 const cardsContainer = document.querySelector('.grid-cards');
@@ -47,9 +51,7 @@ const initialCards = [{
 function openPopup(somePopup) {
   somePopup.classList.add('popup_opened');
 
-  document.addEventListener('keydown', (evt) => {
-    closePopupEsc(somePopup, evt)
-  });
+  document.addEventListener('keydown', closePopupEsc);
 }
 
 // функиция открытия попапа редактирования
@@ -58,13 +60,16 @@ function openEditPopup() {
   inputDescription.value = profileDescriptoin.textContent;
 
   openPopup(editPopup);
+
+  editFormSubmit.classList.add('form__submit_inactive');
+  editFormSubmit.disabled = true;
 }
 
 // функиция открытия попапа добавления карточек
 function openAddPopup() {
-  addForm.reset();
-
   openPopup(addPopup);
+
+
 }
 
 // функиция открытия попапа просмотра изображения
@@ -90,9 +95,10 @@ function closePopup(somePopup) {
 }
 
 // функция закрытия попапа по еск
-function closePopupEsc(somePopup, evt) {
+function closePopupEsc(evt) {
   if (evt.key === 'Escape') {
-    closePopup(somePopup);
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 }
 
@@ -118,6 +124,10 @@ function submitAddForm(evt) {
   cardsContainer.prepend(cardHtml);
 
   closePopup(addPopup);
+
+  addForm.reset();
+  addFormSubmit.classList.add('form__submit_inactive');
+  addFormSubmit.disabled = true;
 }
 
 // функция рэндера карточек на страницу
@@ -160,10 +170,13 @@ function activateLike(evt) {
   targetEl.classList.toggle('grid-card__like-button_active');
 }
 
-// функция закрытия попапа по оверлэю
+// функция закрытия попапа по оверлэю и по крестику
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
-    if (evt.target === evt.currentTarget) {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains('popup__close-button')) {
       closePopup(popup);
     }
   });
@@ -174,7 +187,4 @@ editOpenButton.addEventListener('click', openEditPopup);
 addOpenButton.addEventListener('click', openAddPopup);
 editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
-editCloseButton.addEventListener('click', () => closePopup(editPopup));
-addCloseButton.addEventListener('click', () => closePopup(addPopup));
-imageCloseButton.addEventListener('click', () => closePopup(imagePopup));
 renderCards();
