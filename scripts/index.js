@@ -19,7 +19,7 @@ import {
   cardsContainer,
   initialCards,
   validationConfig
-} from '../valuesForJs/val.js';
+} from '../utils/constans.js';
 
 // устанавливаем валидацию
 const editFormValidator = new FormValidator(validationConfig, editForm);
