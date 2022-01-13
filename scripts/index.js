@@ -38,7 +38,7 @@ function openEditPopup() {
   inputDescription.value = profileDescriptoin.textContent;
 
   openPopup(editPopup);
-  editFormValidator.deactivateSubmit();
+  editFormValidator.resetValidation();
 }
 
 // функиция открытия попапа добавления карточек
