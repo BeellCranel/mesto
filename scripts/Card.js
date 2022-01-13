@@ -3,8 +3,7 @@ export default class Card {
     this._selector = cardSelector;
     this._name = name;
     this._link = link;
-    this._alt = name;
-    this._onClick = onClick;
+    this._openPopupImage = onClick;
   }
 
   _getItem() {
@@ -17,10 +16,17 @@ export default class Card {
 
   _handleRemoveCard = () => {
     this._element.remove();
+    this._element = null;
   };
 
   _handleLikeImg = () => {
     this._element.querySelector('.grid-card__like-button').classList.toggle('grid-card__like-button_active')
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.grid-card__delete-button').addEventListener('click', this._handleRemoveCard);
+    this._element.querySelector('.grid-card__like-button').addEventListener('click', this._handleLikeImg);
+    this._element.querySelector('.grid-card__image').addEventListener('click', this._openPopupImage);
   }
 
   getView() {
@@ -29,9 +35,7 @@ export default class Card {
     this._element.querySelector('.grid-card__image').src = this._link;
     this._element.querySelector('.grid-card__image').alt = this._name;
 
-    this._element.querySelector('.grid-card__delete-button').addEventListener('click', this._handleRemoveCard);
-    this._element.querySelector('.grid-card__like-button').addEventListener('click', this._handleLikeImg);
-    this._element.querySelector('.grid-card__image').addEventListener('click', this._onClick);
+    this._setEventListeners();
 
     return this._element;
   }
