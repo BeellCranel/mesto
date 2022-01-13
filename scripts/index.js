@@ -25,6 +25,7 @@ import {
 const editFormValidator = new FormValidator(validationConfig, editForm);
 const addFormValidator = new FormValidator(validationConfig, addForm);
 
+
 // общая функиция открытия попапа
 function openPopup(somePopup) {
   somePopup.classList.add('popup_opened');
@@ -78,8 +79,6 @@ function closePopupEsc(evt) {
 
 // функиция сабмита попапа редактирования
 function submitEditForm(evt) {
-  evt.preventDefault();
-
   profileUserName.textContent = inputUserName.value;
   profileDescriptoin.textContent = inputDescription.value;
 
@@ -88,14 +87,12 @@ function submitEditForm(evt) {
 
 // функиция сабмита попапа добавления карточек
 function submitAddForm(evt) {
-  evt.preventDefault();
-
   const item = {
     name: inputPlaceName.value,
     link: inputImageUrl.value
   };
 
-  const cardHtml = new Card('.template-card', item.name, item.link, openImagePopup);
+  const cardHtml = createCard(item);
   cardsContainer.prepend(cardHtml.getView());
 
   closePopup(addPopup);
@@ -106,12 +103,17 @@ function submitAddForm(evt) {
 // функция рэндера карточек на страницу
 function renderCards() {
   const cardHtml = initialCards.map((item) => {
-    const cardEl = new Card('.template-card', item.name, item.link, openImagePopup);
+    const cardEl = createCard(item);
 
     return cardEl.getView();
   });
 
   cardsContainer.append(...cardHtml);
+}
+
+// функция создания карточек
+function createCard(item) {
+  return new Card('.template-card', item.name, item.link, openImagePopup);
 }
 
 // функция закрытия попапа по оверлэю и по крестику
