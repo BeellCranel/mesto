@@ -78,7 +78,7 @@ function closePopupEsc(evt) {
 }
 
 // функиция сабмита попапа редактирования
-function submitEditForm(evt) {
+function submitEditForm() {
   profileUserName.textContent = inputUserName.value;
   profileDescriptoin.textContent = inputDescription.value;
 
@@ -86,14 +86,14 @@ function submitEditForm(evt) {
 }
 
 // функиция сабмита попапа добавления карточек
-function submitAddForm(evt) {
+function submitAddForm() {
   const item = {
     name: inputPlaceName.value,
     link: inputImageUrl.value
   };
 
   const cardHtml = createCard(item);
-  cardsContainer.prepend(cardHtml.getView());
+  cardsContainer.prepend(cardHtml);
 
   closePopup(addPopup);
   addForm.reset();
@@ -102,18 +102,16 @@ function submitAddForm(evt) {
 
 // функция рэндера карточек на страницу
 function renderCards() {
-  const cardHtml = initialCards.map((item) => {
-    const cardEl = createCard(item);
-
-    return cardEl.getView();
-  });
+  const cardHtml = initialCards.map((item) => createCard(item));
 
   cardsContainer.append(...cardHtml);
 }
 
 // функция создания карточек
 function createCard(item) {
-  return new Card('.template-card', item.name, item.link, openImagePopup);
+  const cardEl = new Card('.template-card', item.name, item.link, openImagePopup);
+
+  return cardEl.getView();
 }
 
 // функция закрытия попапа по оверлэю и по крестику
