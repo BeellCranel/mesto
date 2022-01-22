@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
 import {
   popups,
@@ -92,7 +93,7 @@ function submitAddForm() {
     link: inputImageUrl.value
   };
 
-  const cardHtml = createCard(item);
+  const cardHtml = cardCreater(item);
   cardsContainer.prepend(cardHtml);
 
   closePopup(addPopup);
@@ -100,19 +101,23 @@ function submitAddForm() {
   addFormValidator.deactivateSubmit();
 }
 
-// функция рэндера карточек на страницу
-function renderCards() {
-  const cardHtml = initialCards.map((item) => createCard(item));
-
-  cardsContainer.append(...cardHtml);
-}
-
-// функция создания карточек
-function createCard(item) {
-  const cardEl = new Card('.template-card', item.name, item.link, openImagePopup);
+const cardCreater = (item) => {
+  const cardEl = new Card({
+      cardSelector: '.template-card',
+      object: item
+    },
+    openImagePopup
+  );
 
   return cardEl.getView();
 }
+
+const cardRenderer = new Section({
+    items: initialCards,
+    renderer: cardCreater
+  },
+  cardsContainer
+);
 
 // функция закрытия попапа по оверлэю и по крестику
 popups.forEach((popup) => {
@@ -133,4 +138,4 @@ editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-renderCards();
+cardRenderer.renderItems();
