@@ -2,12 +2,12 @@ export default class Card {
   constructor({
     cardSelector,
     object,
-    openPopupImage
+    handleCardClick
   }) {
     this._selector = cardSelector;
     this._name = object.name;
     this._link = object.link;
-    this._openPopupImage = openPopupImage;
+    this._openPopupImage = handleCardClick;
   }
 
   _getItem() {

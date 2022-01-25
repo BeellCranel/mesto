@@ -72,7 +72,7 @@ const cardCreater = (item) => {
   const cardEl = new Card({
     cardSelector: '.template-card',
     object: item,
-    openPopupImage: () => popupWithImage.open(item)
+    handleCardClick: () => popupWithImage.open(item)
   });
 
   return cardEl.getView();
