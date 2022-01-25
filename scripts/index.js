@@ -28,12 +28,14 @@ import {
 const editFormValidator = new FormValidator(validationConfig, editForm);
 const addFormValidator = new FormValidator(validationConfig, addForm);
 
+const popupEdit = new Popup(editPopup);
+
 // попап редактирования
 function openEditPopup() {
   inputUserName.value = profileUserName.textContent;
   inputDescription.value = profileDescriptoin.textContent;
 
-  openPopup(editPopup);
+  popupEdit.open();
   editFormValidator.resetValidation();
 }
 
@@ -48,7 +50,7 @@ function submitEditForm() {
   profileUserName.textContent = inputUserName.value;
   profileDescriptoin.textContent = inputDescription.value;
 
-  closePopup(editPopup);
+  popupEdit.close();
 }
 
 // функиция сабмита попапа добавления карточек
