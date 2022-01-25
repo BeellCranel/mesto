@@ -2,6 +2,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 
 import {
   popups,
@@ -27,15 +28,7 @@ import {
 const editFormValidator = new FormValidator(validationConfig, editForm);
 const addFormValidator = new FormValidator(validationConfig, addForm);
 
-
-// общая функиция открытия попапа
-function openPopup(somePopup) {
-  somePopup.classList.add('popup_opened');
-
-  document.addEventListener('keydown', closePopupEsc);
-}
-
-// функиция открытия попапа редактирования
+// попап редактирования
 function openEditPopup() {
   inputUserName.value = profileUserName.textContent;
   inputDescription.value = profileDescriptoin.textContent;
@@ -44,40 +37,11 @@ function openEditPopup() {
   editFormValidator.resetValidation();
 }
 
-// функиция открытия попапа добавления карточек
-function openAddPopup() {
-  openPopup(addPopup);
-}
+// попап добавления карточек
+const popupAddCard = new Popup(addPopup);
 
-// функиция открытия попапа просмотра изображения
-function openImagePopup(evt) {
-  const targetEl = evt.target;
-  const targetElLink = targetEl.getAttribute('src');
-  const targetElAlt = targetEl.getAttribute('alt');
-
-  const imageEl = document.querySelector('.figure__image');
-  imageEl.setAttribute('src', targetElLink);
-  imageEl.setAttribute('alt', targetElAlt);
-
-  const imageCaption = document.querySelector('.figure__image-caption');
-  imageCaption.textContent = targetElAlt;
-
-  openPopup(imagePopup);
-}
-
-// общая функиция закрытия попапа
-function closePopup(somePopup) {
-  somePopup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupEsc);
-}
-
-// функция закрытия попапа по еск
-function closePopupEsc(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-}
+// попап просмотра изображения
+const popupWithImage = new PopupWithImage(imagePopup);
 
 // функиция сабмита попапа редактирования
 function submitEditForm() {
@@ -97,18 +61,17 @@ function submitAddForm() {
   const cardHtml = cardCreater(item);
   cardsContainer.prepend(cardHtml);
 
-  closePopup(addPopup);
+  popupAddCard.close();
   addForm.reset();
   addFormValidator.deactivateSubmit();
 }
 
 const cardCreater = (item) => {
   const cardEl = new Card({
-      cardSelector: '.template-card',
-      object: item
-    },
-    openImagePopup
-  );
+    cardSelector: '.template-card',
+    object: item,
+    openPopupImage: () => popupWithImage.open(item)
+  });
 
   return cardEl.getView();
 }
@@ -120,21 +83,11 @@ const cardRenderer = new Section({
   cardsContainer
 );
 
-// функция закрытия попапа по оверлэю и по крестику
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup);
-    }
-    if (evt.target.classList.contains('popup__close-button')) {
-      closePopup(popup);
-    }
-  });
-});
-
 // назначаем слушатели
 editOpenButton.addEventListener('click', openEditPopup);
-addOpenButton.addEventListener('click', openAddPopup);
+addOpenButton.addEventListener('click', () => {
+  popupAddCard.open()
+});
 editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
 editFormValidator.enableValidation();
