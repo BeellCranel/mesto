@@ -8,11 +8,11 @@ export default class UserInfo {
   }
 
   setUserInfo({
-    inputName,
-    inputDescription
+    name,
+    description
   }) {
-    this._name.textContent = inputName;
-    this._description.textContent = inputDescription;
+    this._name.textContent = name;
+    this._description.textContent = description;
   }
 
   getUserInfo() {

@@ -1,3 +1,6 @@
+import {
+  inputDescription
+} from "../utils/constans.js";
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
@@ -16,23 +19,27 @@ export default class PopupWithForm extends Popup {
     super.close();
   }
 
-  _getInputValues = () => {
-    this._inputList = Array.from(this._form.querySelector('.form__input'));
-    this._inputValues = {};
-    this._inputList.forEach((input) => {
-      this._inputValues[input.name] = input.value;
+  _getInputValues() {
+    const inputList = Array.from(this._form.querySelectorAll('.form__input'));
+    const formValues = {};
+    inputList.forEach(input => {
+      formValues[input.name] = input.value;
     });
+    return formValues;
+  }
+
+  _handleButtonSubmit = () => {
+    this._submit(this._getInputValues());
     this.close();
-    return this._inputValues;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', this._submit(this._getInputValues));
+    this._form.addEventListener('submit', this._handleButtonSubmit);
   }
 
   removeEventListeners() {
     super.removeEventListeners();
-    this._form.removeEventListener('submit', this._submit(this._getInputValues));
+    this._form.removeEventListener('submit', this._handleButtonSubmit);
   }
 }

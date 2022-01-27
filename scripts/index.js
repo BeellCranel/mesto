@@ -3,6 +3,8 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 import {
   popups,
@@ -28,16 +30,28 @@ import {
 const editFormValidator = new FormValidator(validationConfig, editForm);
 const addFormValidator = new FormValidator(validationConfig, addForm);
 
-const popupEdit = new Popup(editPopup);
+const userInfo = new UserInfo({
+  userNameSelector: profileUserName,
+  userDescriptionSelector: profileDescriptoin
+});
+const submitFormHandler = (values) => {
+  userInfo.setUserInfo(values);
+}
+
+const popupWithFormEdit = new PopupWithForm({
+  popupSelector: editPopup,
+  formSelector: editForm,
+  submitFormCallback: submitFormHandler
+});
 
 // попап редактирования
-function openEditPopup() {
-  inputUserName.value = profileUserName.textContent;
-  inputDescription.value = profileDescriptoin.textContent;
+// function openEditPopup() {
+//   inputUserName.value = profileUserName.textContent;
+//   inputDescription.value = profileDescriptoin.textContent;
 
-  popupEdit.open();
-  editFormValidator.resetValidation();
-}
+//   popupEdit.open();
+//   editFormValidator.resetValidation();
+// }
 
 // попап добавления карточек
 const popupAddCard = new Popup(addPopup);
@@ -46,12 +60,12 @@ const popupAddCard = new Popup(addPopup);
 const popupWithImage = new PopupWithImage(imagePopup);
 
 // функиция сабмита попапа редактирования
-function submitEditForm() {
-  profileUserName.textContent = inputUserName.value;
-  profileDescriptoin.textContent = inputDescription.value;
+// function submitEditForm() {
+//   profileUserName.textContent = inputUserName.value;
+//   profileDescriptoin.textContent = inputDescription.value;
 
-  popupEdit.close();
-}
+//   popupEdit.close();
+// }
 
 // функиция сабмита попапа добавления карточек
 function submitAddForm() {
@@ -86,11 +100,13 @@ const cardRenderer = new Section({
 );
 
 // назначаем слушатели
-editOpenButton.addEventListener('click', openEditPopup);
-addOpenButton.addEventListener('click', () => {
-  popupAddCard.open()
+editOpenButton.addEventListener('click', () => {
+  popupWithFormEdit.open();
 });
-editForm.addEventListener('submit', submitEditForm);
+addOpenButton.addEventListener('click', () => {
+  popupAddCard.open();
+});
+// editForm.addEventListener('submit', submitEditForm);
 addForm.addEventListener('submit', submitAddForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
