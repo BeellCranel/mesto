@@ -52,7 +52,10 @@ const popupWithFormEdit = new PopupWithForm({
 // инициализируем класс формы карточек и функцию сабмита
 const submitAddFormHandler = (item) => {
   cardsContainer.prepend(cardCreater(item));
-  addFormValidator.deactivateSubmit();
+}
+const openAddFormHandler = () => {
+  popupWithFormAdd.open();
+  addFormValidator.resetValidation();
 }
 const popupWithFormAdd = new PopupWithForm({
   popupSelector: addPopup,
@@ -85,9 +88,7 @@ const cardRenderer = new Section({
 
 // назначаем слушатели
 editOpenButton.addEventListener('click', openEditFormHandler);
-addOpenButton.addEventListener('click', () => {
-  popupWithFormAdd.open();
-});
+addOpenButton.addEventListener('click', openAddFormHandler);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 cardRenderer.renderItems();
