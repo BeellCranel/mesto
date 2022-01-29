@@ -1,5 +1,4 @@
 export {
-  popups,
   editPopup,
   editOpenButton,
   editForm,
@@ -9,8 +8,6 @@ export {
   imagePopup,
   inputUserName,
   inputDescription,
-  inputPlaceName,
-  inputImageUrl,
   profileUserName,
   profileDescriptoin,
   cardsContainer,
@@ -18,8 +15,6 @@ export {
   validationConfig
 };
 
-// Обьявляем все пременные
-const popups = document.querySelectorAll('.popup');
 // Переменные edit попапа
 const editPopup = document.querySelector('.popup_edit');
 const editOpenButton = document.querySelector('.profile__edit-button');
@@ -33,8 +28,6 @@ const imagePopup = document.querySelector('.popup_image');
 // Переменные инпутов
 const inputUserName = document.querySelector('.form__input_type_user-name');
 const inputDescription = document.querySelector('.form__input_type_user-description');
-const inputPlaceName = document.querySelector('.form__input_type_place-name');
-const inputImageUrl = document.querySelector('.form__input_type_image-url');
 // Остальные переменные
 const profileUserName = document.querySelector('.profile__user-name');
 const profileDescriptoin = document.querySelector('.profile__user-description');
