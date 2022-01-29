@@ -30,68 +30,55 @@ import {
 const editFormValidator = new FormValidator(validationConfig, editForm);
 const addFormValidator = new FormValidator(validationConfig, addForm);
 
+//инициализируем класс и функции по сбору инфы о пользователе
 const userInfo = new UserInfo({
   userNameSelector: profileUserName,
   userDescriptionSelector: profileDescriptoin
 });
-const submitFormHandler = (values) => {
+const submitEditFormHandler = (values) => {
   userInfo.setUserInfo(values);
 }
-
+const openEditFormHandler = () => {
+  const userInfoVal = userInfo.getUserInfo();
+  inputUserName.value = userInfoVal.name;
+  inputDescription.value = userInfoVal.description;
+  popupWithFormEdit.open();
+  editFormValidator.resetValidation();
+}
+//инициализируем класс формы профиля
 const popupWithFormEdit = new PopupWithForm({
   popupSelector: editPopup,
   formSelector: editForm,
-  submitFormCallback: submitFormHandler
+  submitFormCallback: submitEditFormHandler
 });
 
-// попап редактирования
-// function openEditPopup() {
-//   inputUserName.value = profileUserName.textContent;
-//   inputDescription.value = profileDescriptoin.textContent;
-
-//   popupEdit.open();
-//   editFormValidator.resetValidation();
-// }
-
-// попап добавления карточек
-const popupAddCard = new Popup(addPopup);
-
-// попап просмотра изображения
-const popupWithImage = new PopupWithImage(imagePopup);
-
-// функиция сабмита попапа редактирования
-// function submitEditForm() {
-//   profileUserName.textContent = inputUserName.value;
-//   profileDescriptoin.textContent = inputDescription.value;
-
-//   popupEdit.close();
-// }
-
-// функиция сабмита попапа добавления карточек
-function submitAddForm() {
-  const item = {
-    name: inputPlaceName.value,
-    link: inputImageUrl.value
-  };
-
-  const cardHtml = cardCreater(item);
-  cardsContainer.prepend(cardHtml);
-
-  popupAddCard.close();
-  addForm.reset();
+// инициализируем класс формы карточек и функцию сабмита
+const submitAddFormHandler = (item) => {
+  cardsContainer.prepend(cardCreater(item));
   addFormValidator.deactivateSubmit();
 }
+const popupWithFormAdd = new PopupWithForm({
+  popupSelector: addPopup,
+  formSelector: addForm,
+  submitFormCallback: submitAddFormHandler
+});
 
+// инициализируем класс формы просмотра изображений
+const popupWithImage = new PopupWithImage(imagePopup);
+const openPopupWithImage = (item) => {
+  popupWithImage.open(item);
+}
+
+// инициализируес классы создания и рэндэра карточек на страницу
 const cardCreater = (item) => {
   const cardEl = new Card({
     cardSelector: '.template-card',
     object: item,
-    handleCardClick: () => popupWithImage.open(item)
+    handleCardClick: openPopupWithImage
   });
 
   return cardEl.getView();
 }
-
 const cardRenderer = new Section({
     items: initialCards,
     renderer: cardCreater
@@ -100,14 +87,10 @@ const cardRenderer = new Section({
 );
 
 // назначаем слушатели
-editOpenButton.addEventListener('click', () => {
-  popupWithFormEdit.open();
-});
+editOpenButton.addEventListener('click', openEditFormHandler);
 addOpenButton.addEventListener('click', () => {
-  popupAddCard.open();
+  popupWithFormAdd.open();
 });
-// editForm.addEventListener('submit', submitEditForm);
-addForm.addEventListener('submit', submitAddForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 cardRenderer.renderItems();
