@@ -39,8 +39,8 @@ const openEditFormHandler = () => {
   const userInfoVal = userInfo.getUserInfo();
   inputUserName.value = userInfoVal.name;
   inputDescription.value = userInfoVal.description;
-  popupWithFormEdit.open();
   editFormValidator.resetValidation();
+  popupWithFormEdit.open();
 }
 //инициализируем класс формы профиля
 const popupWithFormEdit = new PopupWithForm({
@@ -54,8 +54,8 @@ const submitAddFormHandler = (item) => {
   cardsContainer.prepend(cardCreater(item));
 }
 const openAddFormHandler = () => {
-  popupWithFormAdd.open();
   addFormValidator.resetValidation();
+  popupWithFormAdd.open();
 }
 const popupWithFormAdd = new PopupWithForm({
   popupSelector: addPopup,
