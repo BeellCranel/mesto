@@ -5,7 +5,6 @@ export default class FormValidator {
     this._submitButtonSelector = options.submitButtonSelector;
     this._inactiveButtonClass = options.inactiveButtonClass;
     this._inputErrorClass = options.inputErrorClass;
-    this._errorClass = options.errorClass;
 
     this._inputList = Array.from(this._formEl.querySelectorAll(this._inputSelector));
     this._submitButton = this._formEl.querySelector(this._submitButtonSelector);
@@ -15,7 +14,6 @@ export default class FormValidator {
     const errorMessage = this._formEl.querySelector(`#${inputEl.id}-error`);
 
     inputEl.classList.add(this._inputErrorClass);
-    errorMessage.classList.add(this._errorClass);
     errorMessage.textContent = errorText;
   };
 
@@ -23,7 +21,6 @@ export default class FormValidator {
     const errorMessage = this._formEl.querySelector(`#${inputEl.id}-error`);
     if (!errorMessage) return;
     inputEl.classList.remove(this._inputErrorClass);
-    errorMessage.classList.remove(this._errorClass);
     errorMessage.textContent = '';
   };
 
