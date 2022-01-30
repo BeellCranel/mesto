@@ -1,6 +1,3 @@
-import {
-  inputDescription
-} from "../utils/constans.js";
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
