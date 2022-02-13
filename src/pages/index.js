@@ -86,14 +86,9 @@ const cardRenderer = new Section({
   cardsContainer
 );
 
-function popupConfirm() {
-  document.querySelector('.popup_avatar').classList.add('popup_opened');
-}
-
 // назначаем слушатели
 editOpenButton.addEventListener('click', openEditFormHandler);
 addOpenButton.addEventListener('click', openAddFormHandler);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 cardRenderer.renderItems();
-document.querySelector('.logo').addEventListener('click', popupConfirm);

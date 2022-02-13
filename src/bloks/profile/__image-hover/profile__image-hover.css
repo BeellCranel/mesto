@@ -1,0 +1,18 @@
+.profile__image-hover::before {
+  display: block;
+  content: "";
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  z-index: 4;
+  transition: ease-in-out .4s;
+}
+
+.profile__image-hover:hover::before {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, .8);
+  background-image: url(../../../images/profile/__image-hover/image-hover.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

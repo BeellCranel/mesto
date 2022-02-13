@@ -18,6 +18,8 @@
 
 @import url(../bloks/profile/profile.css);
 
+@import url(../bloks/profile/__image-hover/profile__image-hover.css);
+
 @import url(../bloks/profile/__image/profile__image.css);
 
 @import url(../bloks/profile/__info/profile__info.css);
