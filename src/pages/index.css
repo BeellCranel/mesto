@@ -75,11 +75,15 @@
 
 @import url(../bloks/form/__title/form__title.css);
 
+@import url(../bloks/form/__title/_confirm/form__title_confirm.css);
+
 @import url(../bloks/form/__submit/form__submit.css);
 
 @import url(../bloks/form/__submit/_inactive/form__submit_inactive.css);
 
 @import url(../bloks/form/__fieldset/form__fieldset.css);
+
+@import url(../bloks/form/__fieldset/_avatar/form__fieldset_avatar.css);
 
 @import url(../bloks/form/__field/form__field.css);
 
