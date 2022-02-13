@@ -18,4 +18,4 @@
 
 ### Github Pages
 
-* [ссылка на мою работу в Github Pages](https://beellcranel.github.io/another-mesto/)
+* [ссылка на мою работу в Github Pages](https://beellcranel.github.io/mesto/)
