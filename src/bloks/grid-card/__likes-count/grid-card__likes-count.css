@@ -1,0 +1,10 @@
+.grid-card__likes-count {
+  color: #000;
+  align-self: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  margin: 0 auto;
+  padding: 0;
+}

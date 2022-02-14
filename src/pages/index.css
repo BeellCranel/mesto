@@ -49,9 +49,13 @@
 
 @import url(../bloks/grid-card/__title/grid-card__title.css);
 
+@import url(../bloks/grid-card/__like-section/grid-card__like-section.css);
+
 @import url(../bloks/grid-card/__like-button/grid-card__like-button.css);
 
 @import url(../bloks/grid-card/__like-button/_active/grid-card__like-button_active.css);
+
+@import url(../bloks/grid-card/__likes-count/grid-card__likes-count.css);
 
 /* footer */
 
