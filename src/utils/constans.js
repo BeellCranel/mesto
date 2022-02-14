@@ -8,6 +8,7 @@ export {
   imagePopup,
   inputUserName,
   inputDescription,
+  profileAvatar,
   profileUserName,
   profileDescriptoin,
   cardsContainer,
@@ -29,6 +30,7 @@ const imagePopup = document.querySelector('.popup_image');
 const inputUserName = document.querySelector('.form__input_type_user-name');
 const inputDescription = document.querySelector('.form__input_type_user-description');
 // Остальные переменные
+const profileAvatar = document.querySelector('.profile__image');
 const profileUserName = document.querySelector('.profile__user-name');
 const profileDescriptoin = document.querySelector('.profile__user-description');
 const cardsContainer = document.querySelector('.grid-cards');
