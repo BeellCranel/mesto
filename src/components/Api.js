@@ -31,4 +31,19 @@ export default class Api {
       })
       .then(this._getResponseData)
   }
+
+  editInfo(name, description) {
+    return fetch(`${this._adress}/users/me`, {
+        method: 'PATCH',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          about: description
+        })
+      })
+      .then(this._getResponseData)
+  }
 }

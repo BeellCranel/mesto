@@ -54,7 +54,17 @@ api.getUserInfo()
   });
 
 const submitEditFormHandler = (values) => {
-  userInfo.setUserInfo(values);
+  api.editInfo(values.name, values.description)
+    .then((res) => {
+      userInfo.setUserInfo({
+        name: res.name,
+        description: res.about,
+        avatar: profileAvatar.src
+      });
+    })
+    .catch((err) => {
+      console.log(`Ошибка редактирования профиля методом PATCH: ${err}`)
+    })
 }
 const openEditFormHandler = () => {
   const userInfoVal = userInfo.getUserInfo();
