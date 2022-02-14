@@ -82,7 +82,14 @@ const popupWithFormEdit = new PopupWithForm({
 
 // инициализируем класс формы карточек и функцию сабмита
 const submitAddFormHandler = (item) => {
-  cardsContainer.prepend(cardCreater(item));
+  // cardsContainer.prepend(cardCreater(item));
+  api.uploadCard(item.name, item.link)
+    .then((res) => {
+      cardRenderer.addItem(cardCreater(res));
+    })
+    .catch((err) => {
+      console.log(`Ошибка загрузки карточки методом POST: ${err}`)
+    })
 }
 const openAddFormHandler = () => {
   addFormValidator.resetValidation();
