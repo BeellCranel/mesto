@@ -50,7 +50,7 @@ api.getUserInfo()
     });
   })
   .catch((err) => {
-    console.log(err);
+    console.log(`Ошибка с загрузкой данных о пользователе с сервера: ${err}`);
   });
 
 const submitEditFormHandler = (values) => {
@@ -101,15 +101,20 @@ const cardCreater = (item) => {
   return cardEl.getView();
 }
 const cardRenderer = new Section({
-    items: initialCards,
     renderer: cardCreater
   },
   cardsContainer
 );
+api.getCards()
+  .then((cards) => {
+    cardRenderer.renderItems(cards)
+  })
+  .catch((err) => {
+    console.log(`Ошибка с стартовой загрузкой карточек с сервера: ${err}`)
+  });
 
 // назначаем слушатели
 editOpenButton.addEventListener('click', openEditFormHandler);
 addOpenButton.addEventListener('click', openAddFormHandler);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-cardRenderer.renderItems();
