@@ -43,6 +43,8 @@
 
 @import url(../bloks/grid-card/__delete-button/grid-card__delete-button.css);
 
+@import url(../bloks/grid-card/__delete-button/_inactive/grid-card__delete-button_active.css);
+
 @import url(../bloks/grid-card/__image/grid-card__image.css);
 
 @import url(../bloks/grid-card/__caption/grid-card__caption.css);

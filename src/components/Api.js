@@ -61,4 +61,49 @@ export default class Api {
       })
       .then(this._getResponseData)
   }
+
+  deleteCard(cardId) {
+    return fetch(`${this._adress}/cards/${cardId}`, {
+        method: "DELETE",
+        headers: {
+          authorization: this._token,
+        }
+      })
+      .then(this._getResponseData)
+  }
+
+  addLike(cardId) {
+    return fetch(`${this._adress}/cards/${cardId}/likes`, {
+        method: "PUT",
+        headers: {
+          authorization: this._token,
+        }
+      })
+      .then(this._getResponseData)
+  }
+
+  deleteLike(cardId) {
+    return fetch(`${this._adress}/cards/${cardId}/likes`, {
+        method: "DELETE",
+        headers: {
+          authorization: this._token,
+        }
+      })
+      .then(this._getResponseData)
+  }
+
+  changeAvatar(link) {
+    return fetch(`${this._adress}/users/me/avatar`, {
+        method: "PATCH",
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          avatar: link
+        })
+      })
+      .then(this._getResponseData)
+  }
+
 }

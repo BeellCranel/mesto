@@ -3,6 +3,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import './index.css';
@@ -11,17 +12,24 @@ import {
   editPopup,
   editOpenButton,
   editForm,
+  editSubmitBtn,
   addPopup,
   addOpenButton,
   addForm,
+  addSubmitBtn,
   imagePopup,
+  confirmPopup,
+  confirmForm,
+  confirmSubmitBtn,
+  avatarPopup,
+  avatarForm,
+  avatarSubmitBtn,
   inputUserName,
   inputDescription,
   profileAvatar,
   profileUserName,
   profileDescriptoin,
   cardsContainer,
-  initialCards,
   validationConfig
 } from '../utils/constans.js';
 
@@ -40,6 +48,7 @@ const userInfo = new UserInfo({
   userDescriptionSelector: profileDescriptoin,
   avatar: profileAvatar
 });
+// осуществляем запрос данных пользователя с сервера
 api.getUserInfo()
   .then((user) => {
     userInfo.setUserInfo({
@@ -53,18 +62,23 @@ api.getUserInfo()
     console.log(`Ошибка с загрузкой данных о пользователе с сервера: ${err}`);
   });
 
+// инициализируем класс формы профиля, функцию сабмита и открытия формы
 const submitEditFormHandler = (values) => {
   api.editInfo(values.name, values.description)
     .then((res) => {
       userInfo.setUserInfo({
         name: res.name,
         description: res.about,
-        avatar: profileAvatar.src
+        avatar: res.avatar
       });
+      editSubmitBtn.textContent = 'Сохранение...';
     })
     .catch((err) => {
       console.log(`Ошибка редактирования профиля методом PATCH: ${err}`)
     })
+    .finally(() => {
+      editSubmitBtn.textContent = 'Сохранить';
+    });
 }
 const openEditFormHandler = () => {
   const userInfoVal = userInfo.getUserInfo();
@@ -73,7 +87,6 @@ const openEditFormHandler = () => {
   editFormValidator.resetValidation();
   popupWithFormEdit.open();
 }
-//инициализируем класс формы профиля
 const popupWithFormEdit = new PopupWithForm({
   popupSelector: editPopup,
   formSelector: editForm,
@@ -82,14 +95,17 @@ const popupWithFormEdit = new PopupWithForm({
 
 // инициализируем класс формы карточек и функцию сабмита
 const submitAddFormHandler = (item) => {
-  // cardsContainer.prepend(cardCreater(item));
   api.uploadCard(item.name, item.link)
     .then((res) => {
       cardRenderer.addItem(cardCreater(res));
+      addSubmitBtn.textContent = 'Создание...';
     })
     .catch((err) => {
       console.log(`Ошибка загрузки карточки методом POST: ${err}`)
     })
+    .finally(() => {
+      addSubmitBtn.textContent = 'Создать';
+    });
 }
 const openAddFormHandler = () => {
   addFormValidator.resetValidation();
@@ -107,12 +123,50 @@ const openPopupWithImage = (item) => {
   popupWithImage.open(item);
 }
 
+// инициализируем класс confirm попапа, функции сабмита и открытия попапа
+const submitConfirmPopup = (item) => {
+  api.deleteCard(item.getCardId())
+    .then(() => {
+      item.removeCard();
+    })
+    .catch((err) => {
+      console.log(`Ошибка удаления карточки: ${err}`);
+    });
+}
+const popupWithConfirm = new PopupWithConfirm(confirmPopup, confirmForm, submitConfirmPopup);
+const openPopupWithConfirm = (item) => {
+  popupWithConfirm.open(item);
+}
+
 // инициализируес классы создания и рэндэра карточек на страницу
+const likeCard = (item) => {
+  if (item.checkLike()) {
+    api.deleteLike(item.getCardId())
+      .then((res) => {
+        item.handleLikeImg(res.likes);
+      })
+      .catch((err) => {
+        console.log(`Ошибка удаления лайка: ${err}`);
+      });
+  } else {
+    api.addLike(item.getCardId())
+      .then((res) => {
+        item.handleLikeImg(res.likes);
+      })
+      .catch((err) => {
+        console.log(`Ошибка добавления лайка: ${err}`)
+      });
+  }
+}
+
 const cardCreater = (item) => {
   const cardEl = new Card({
     cardSelector: '.template-card',
     object: item,
-    handleCardClick: openPopupWithImage
+    userId: userInfo._id,
+    handleOpenImagePopup: openPopupWithImage,
+    handleOpenConfirmPopup: openPopupWithConfirm,
+    handleLikeCard: likeCard
   });
 
   return cardEl.getView();
@@ -122,12 +176,13 @@ const cardRenderer = new Section({
   },
   cardsContainer
 );
+// Осуществляем загрузку карточек с сервера
 api.getCards()
   .then((cards) => {
-    cardRenderer.renderItems(cards)
+    cardRenderer.renderItems(cards.reverse());
   })
   .catch((err) => {
-    console.log(`Ошибка с стартовой загрузкой карточек с сервера: ${err}`)
+    console.log(`Ошибка с стартовой загрузкой карточек с сервера: ${err}`);
   });
 
 // назначаем слушатели
