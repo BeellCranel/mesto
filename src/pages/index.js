@@ -22,6 +22,7 @@ import {
   confirmForm,
   confirmSubmitBtn,
   avatarPopup,
+  avatarOpenButton,
   avatarForm,
   avatarSubmitBtn,
   inputUserName,
@@ -41,6 +42,7 @@ const api = new Api({
 // устанавливаем валидацию
 const editFormValidator = new FormValidator(validationConfig, editForm);
 const addFormValidator = new FormValidator(validationConfig, addForm);
+const avatarFormValidator = new FormValidator(validationConfig, avatarForm);
 
 //инициализируем класс и функции по сбору инфы о пользователе
 const userInfo = new UserInfo({
@@ -117,6 +119,34 @@ const popupWithFormAdd = new PopupWithForm({
   submitFormCallback: submitAddFormHandler
 });
 
+// инициализируем класс avatar попапаб, функции сабмита и открытия попапа
+const submitAvatarFormHandler = (item) => {
+  api.changeAvatar(item.link)
+    .then((res) => {
+      userInfo.setUserInfo({
+        name: res.name,
+        description: res.about,
+        avatar: res.avatar
+      });
+      avatarSubmitBtn.textContent = 'Сохранение...';
+    })
+    .catch((err) => {
+      console.log(`Ошибка редактирования аватара: ${err}`);
+    })
+    .finally(() => {
+      avatarSubmitBtn.textContent = 'Сохранить';
+    })
+}
+const openAvatarFormHandler = () => {
+  avatarFormValidator.resetValidation();
+  popupWithFormAvatar.open();
+}
+const popupWithFormAvatar = new PopupWithForm({
+  popupSelector: avatarPopup,
+  formSelector: avatarForm,
+  submitFormCallback: submitAvatarFormHandler
+});
+
 // инициализируем класс формы просмотра изображений
 const popupWithImage = new PopupWithImage(imagePopup);
 const openPopupWithImage = (item) => {
@@ -188,5 +218,7 @@ api.getCards()
 // назначаем слушатели
 editOpenButton.addEventListener('click', openEditFormHandler);
 addOpenButton.addEventListener('click', openAddFormHandler);
+avatarOpenButton.addEventListener('click', openAvatarFormHandler);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+avatarFormValidator.enableValidation();

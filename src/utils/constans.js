@@ -12,6 +12,7 @@ export {
   confirmForm,
   confirmSubmitBtn,
   avatarPopup,
+  avatarOpenButton,
   avatarForm,
   avatarSubmitBtn,
   inputUserName,
@@ -41,6 +42,7 @@ const confirmForm = confirmPopup.querySelector('.form');
 const confirmSubmitBtn = confirmPopup.querySelector('.form__submit');
 // Переменные avatar попапа
 const avatarPopup = document.querySelector('.popup_avatar');
+const avatarOpenButton = document.querySelector('.profile__image-hover');
 const avatarForm = avatarPopup.querySelector('.form');
 const avatarSubmitBtn = avatarPopup.querySelector('.form__submit');
 // Переменные инпутов
