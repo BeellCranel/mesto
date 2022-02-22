@@ -1,7 +1,7 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "Цели седьмой проэктной работы.",
+  "description": "[Место](https://beellcranel.github.io/mesto/) - это проект, в которов можно загружать фотографии, лайкать их, менять профиль",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -31,6 +31,7 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.5.3",
     "postcss-loader": "^6.2.1",
+    "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.3",
     "webpuck": "^0.0.0"
