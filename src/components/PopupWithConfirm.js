@@ -8,8 +8,8 @@ export default class PopupWithConfirm extends Popup {
   }
 
   open(item) {
-    super.open();
     this._element = item;
+    super.open();
   }
 
   _handleSubmitDltCard = (evt) => {
@@ -20,6 +20,11 @@ export default class PopupWithConfirm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', this._handleSubmitDltCard)
+    this._form.addEventListener('submit', this._handleSubmitDltCard);
+  }
+
+  removeEventListeners() {
+    super.removeEventListeners();
+    this._form.removeEventListener('submit', this._handleSubmitDltCard);
   }
 }

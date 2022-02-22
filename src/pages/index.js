@@ -50,19 +50,6 @@ const userInfo = new UserInfo({
   userDescriptionSelector: profileDescriptoin,
   avatar: profileAvatar
 });
-// осуществляем запрос данных пользователя с сервера
-api.getUserInfo()
-  .then((user) => {
-    userInfo.setUserInfo({
-      name: user.name,
-      description: user.about,
-      avatar: user.avatar,
-      id: user._id
-    });
-  })
-  .catch((err) => {
-    console.log(`Ошибка с загрузкой данных о пользователе с сервера: ${err}`);
-  });
 
 // инициализируем класс формы профиля, функцию сабмита и открытия формы
 const submitEditFormHandler = (values) => {
@@ -73,13 +60,10 @@ const submitEditFormHandler = (values) => {
         description: res.about,
         avatar: res.avatar
       });
-      editSubmitBtn.textContent = 'Сохранение...';
+      popupWithFormEdit.close();
     })
     .catch((err) => {
       console.log(`Ошибка редактирования профиля методом PATCH: ${err}`)
-    })
-    .finally(() => {
-      editSubmitBtn.textContent = 'Сохранить';
     });
 }
 const openEditFormHandler = () => {
@@ -100,13 +84,10 @@ const submitAddFormHandler = (item) => {
   api.uploadCard(item.name, item.link)
     .then((res) => {
       cardRenderer.addItem(cardCreater(res));
-      addSubmitBtn.textContent = 'Создание...';
+      popupWithFormAdd.close();
     })
     .catch((err) => {
       console.log(`Ошибка загрузки карточки методом POST: ${err}`)
-    })
-    .finally(() => {
-      addSubmitBtn.textContent = 'Создать';
     });
 }
 const openAddFormHandler = () => {
@@ -128,14 +109,11 @@ const submitAvatarFormHandler = (item) => {
         description: res.about,
         avatar: res.avatar
       });
-      avatarSubmitBtn.textContent = 'Сохранение...';
+      popupWithFormAvatar.close();
     })
     .catch((err) => {
       console.log(`Ошибка редактирования аватара: ${err}`);
-    })
-    .finally(() => {
-      avatarSubmitBtn.textContent = 'Сохранить';
-    })
+    });
 }
 const openAvatarFormHandler = () => {
   avatarFormValidator.resetValidation();
@@ -206,13 +184,33 @@ const cardRenderer = new Section({
   },
   cardsContainer
 );
-// Осуществляем загрузку карточек с сервера
-api.getCards()
-  .then((cards) => {
-    cardRenderer.renderItems(cards.reverse());
+// Осуществляем загрузку карточек и данных пользователя с сервера
+const getServerUserInfo = api.getUserInfo()
+  .then((ServerUserInfo) => {
+    return ServerUserInfo;
   })
   .catch((err) => {
-    console.log(`Ошибка с стартовой загрузкой карточек с сервера: ${err}`);
+    console.log(`Ошибка загрузки данных пользователя с сервера: ${err}`);
+  });
+const getServerInitialCards = api.getCards()
+  .then((ServerInitialCards) => {
+    return ServerInitialCards;
+  })
+  .catch((err) => {
+    console.log(`Ошибка загрузки карточек с сервера: ${err}`)
+  });
+Promise.all([getServerUserInfo, getServerInitialCards])
+  .then(([ServerUserInfo, ServerInitialCards]) => {
+    userInfo.setUserInfo({
+      name: ServerUserInfo.name,
+      description: ServerUserInfo.about,
+      avatar: ServerUserInfo.avatar,
+      id: ServerUserInfo._id
+    });
+    cardRenderer.renderItems(ServerInitialCards.reverse());
+  })
+  .catch((err) => {
+    console.log(`Ошибка загрузки данных с сервера: ${err}`);
   });
 
 // назначаем слушатели
