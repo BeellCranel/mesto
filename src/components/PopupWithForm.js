@@ -19,7 +19,6 @@ export default class PopupWithForm extends Popup {
   }
 
   open() {
-    this._submitButton.value = 'Сохранить';
     super.open();
   }
 

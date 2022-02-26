@@ -20,7 +20,6 @@ import {
   imagePopup,
   confirmPopup,
   confirmForm,
-  confirmSubmitBtn,
   avatarPopup,
   avatarOpenButton,
   avatarForm,
@@ -64,6 +63,9 @@ const submitEditFormHandler = (values) => {
     })
     .catch((err) => {
       console.log(`Ошибка редактирования профиля методом PATCH: ${err}`)
+    })
+    .finally(() => {
+      editSubmitBtn.value = 'Сохранить';
     });
 }
 const openEditFormHandler = () => {
@@ -88,6 +90,9 @@ const submitAddFormHandler = (item) => {
     })
     .catch((err) => {
       console.log(`Ошибка загрузки карточки методом POST: ${err}`)
+    })
+    .finally(() => {
+      addSubmitBtn.value = 'Сохранить';
     });
 }
 const openAddFormHandler = () => {
@@ -113,6 +118,9 @@ const submitAvatarFormHandler = (item) => {
     })
     .catch((err) => {
       console.log(`Ошибка редактирования аватара: ${err}`);
+    })
+    .finally(() => {
+      avatarSubmitBtn.value = 'Сохранить';
     });
 }
 const openAvatarFormHandler = () => {

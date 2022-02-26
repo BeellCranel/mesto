@@ -10,7 +10,6 @@ export {
   imagePopup,
   confirmPopup,
   confirmForm,
-  confirmSubmitBtn,
   avatarPopup,
   avatarOpenButton,
   avatarForm,
@@ -39,7 +38,6 @@ const imagePopup = document.querySelector('.popup_image');
 // Переменные confirm попапа
 const confirmPopup = document.querySelector('.popup_confirm');
 const confirmForm = confirmPopup.querySelector('.form');
-const confirmSubmitBtn = confirmPopup.querySelector('.form__submit');
 // Переменные avatar попапа
 const avatarPopup = document.querySelector('.popup_avatar');
 const avatarOpenButton = document.querySelector('.profile__image-hover');
