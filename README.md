@@ -31,6 +31,6 @@
 
 * [ссылка на мою работу в Github Pages](https://beellcranel.github.io/mesto/)
 
-### Статус:
+### Статус
 
 Завершен
